@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SuperSave));
             appsList = new CheckedListBox();
             saveInterval = new NumericUpDown();
             label1 = new Label();
             setBind = new Button();
+            autostart = new CheckBox();
+            traystart = new CheckBox();
+            trayCollapse = new CheckBox();
+            notifyIcon = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)saveInterval).BeginInit();
             SuspendLayout();
             // 
@@ -41,7 +47,7 @@
             appsList.FormattingEnabled = true;
             appsList.Location = new Point(0, 0);
             appsList.Name = "appsList";
-            appsList.Size = new Size(215, 94);
+            appsList.Size = new Size(215, 166);
             appsList.TabIndex = 0;
             // 
             // saveInterval
@@ -54,6 +60,7 @@
             saveInterval.Size = new Size(48, 23);
             saveInterval.TabIndex = 1;
             saveInterval.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            saveInterval.ValueChanged += saveInterval_ValueChanged;
             // 
             // label1
             // 
@@ -76,15 +83,61 @@
             setBind.UseVisualStyleBackColor = true;
             setBind.Click += setBind_Click;
             // 
+            // autostart
+            // 
+            autostart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            autostart.AutoSize = true;
+            autostart.Location = new Point(233, 72);
+            autostart.Name = "autostart";
+            autostart.Size = new Size(79, 19);
+            autostart.TabIndex = 4;
+            autostart.Text = "Auto Start";
+            autostart.UseVisualStyleBackColor = true;
+            autostart.CheckedChanged += autostart_CheckedChanged;
+            // 
+            // traystart
+            // 
+            traystart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            traystart.AutoSize = true;
+            traystart.Location = new Point(233, 97);
+            traystart.Name = "traystart";
+            traystart.Size = new Size(86, 19);
+            traystart.TabIndex = 5;
+            traystart.Text = "Start in tray";
+            traystart.UseVisualStyleBackColor = true;
+            traystart.CheckedChanged += traystart_CheckedChanged;
+            // 
+            // trayCollapse
+            // 
+            trayCollapse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            trayCollapse.AutoSize = true;
+            trayCollapse.Location = new Point(232, 122);
+            trayCollapse.Name = "trayCollapse";
+            trayCollapse.Size = new Size(87, 19);
+            trayCollapse.TabIndex = 6;
+            trayCollapse.Text = "Hide in tray";
+            trayCollapse.UseVisualStyleBackColor = true;
+            trayCollapse.CheckedChanged += trayCollapse_CheckedChanged;
+            // 
+            // notifyIcon
+            // 
+            notifyIcon.Icon = (Icon)resources.GetObject("notifyIcon.Icon");
+            notifyIcon.Text = "SuperSave";
+            notifyIcon.MouseClick += notifyIcon_MouseClick;
+            // 
             // SuperSave
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(387, 96);
+            ClientSize = new Size(387, 162);
+            Controls.Add(trayCollapse);
+            Controls.Add(traystart);
+            Controls.Add(autostart);
             Controls.Add(setBind);
             Controls.Add(label1);
             Controls.Add(saveInterval);
             Controls.Add(appsList);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(403000, 1000000);
             MinimumSize = new Size(403, 135);
             Name = "SuperSave";
@@ -92,6 +145,7 @@
             Text = "SuperSave";
             FormClosing += SuperSave_FormClosing;
             Load += Form1_Load;
+            Shown += SuperSave_Shown;
             ((System.ComponentModel.ISupportInitialize)saveInterval).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -103,5 +157,9 @@
         private NumericUpDown saveInterval;
         private Label label1;
         private Button setBind;
+        private CheckBox autostart;
+        private CheckBox traystart;
+        private CheckBox trayCollapse;
+        private NotifyIcon notifyIcon;
     }
 }

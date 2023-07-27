@@ -54,10 +54,10 @@ namespace SuperSave
         // MAIN LOGIC
         private async void Form1_Load(object sender, EventArgs e)
         {
-            string data = "v2 ;; 5 ;; True ;; False ;; True";
-            if (File.Exists("super.save"))
+            string data = "v2 ;; 1 ;; True ;; False ;; True";
+            if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\super.save"))
             {
-                data = File.ReadAllText("super.save");
+                data = File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\super.save");
             }
             string[] dataParts = data.Split(" ;; ");
 
@@ -244,7 +244,7 @@ namespace SuperSave
                 }
             }
 
-            File.WriteAllText("super.save", contents);
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\super.save", contents);
         }
 
         private void trayCollapse_CheckedChanged(object sender, EventArgs e)
